@@ -22,12 +22,13 @@ while(j <= 7, recursive_fib(j) println; j = j + 1)
 //Problem 2
 "Mess up / to return zero when denominator is 0" println
 Number real_division := Number getSlot("/")
-Number / := method(denominator, if(denominator == 0, 0, denominator real_division))
+Number / := method(denominator, if(denominator == 0, 0, self real_division(denominator)))
 (0/0) println
 
 //Problem 3
 "Add up all the numbers in a 2d array" println
-List sum2d := method(theSum := 0
+List sum2d := method(
+	theSum := 0
 	self foreach(element, 
 		if(element type == "List", 
 			theSum = theSum + element sum2d, 
@@ -37,3 +38,17 @@ List sum2d := method(theSum := 0
 )
 list(1,2,3) sum2d println
 list(1,2,list(1,2)) sum2d println
+
+//Problem 4
+"compute average of a list of numbers" println
+IoException := Exception clone
+List myAverage := method(
+	sum := 0
+	self foreach(element,
+		(element type == "Number") ifFalse(IoException raise("Non numeric element."))
+		sum = sum + element
+	)
+	sum / (self size)
+)
+list(1,2,3,4,5) myAverage println
+list(1,2,3,4,"hex") myAverage
