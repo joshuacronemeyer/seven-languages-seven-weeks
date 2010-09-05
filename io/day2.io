@@ -25,3 +25,15 @@ Number real_division := Number getSlot("/")
 Number / := method(denominator, if(denominator == 0, 0, denominator real_division))
 (0/0) println
 
+//Problem 3
+"Add up all the numbers in a 2d array" println
+List sum2d := method(theSum := 0
+	self foreach(element, 
+		if(element type == "List", 
+			theSum = theSum + element sum2d, 
+			theSum = theSum + element
+		)
+	)
+)
+list(1,2,3) sum2d println
+list(1,2,list(1,2)) sum2d println
