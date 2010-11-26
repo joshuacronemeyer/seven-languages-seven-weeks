@@ -58,8 +58,29 @@ DayTwoProblemFour := UnitTest clone do(
 	)
 )
 
+DayTwoProblemFive := UnitTest clone do(
+	testSettingFirstElementOfFirstDimension := method(
+		twoDList := TwoDList clone
+		twoDList dim(2,2)
+		twoDList set(0,0,99)
+		assertEquals(99, twoDList get(0,0))
+	)
+	testSettingOutOfBoundsElementOfTwoDimensionalList := method(
+		twoDList := TwoDList clone
+		twoDList dim(2,2)
+		assertRaisesException(twoDList set(2,0,99))
+		assertRaisesException(twoDList set(0,2,99))
+	)
+	testGettingOutOfBoundsElementOfTwoDimensionalList := method(
+		twoDList := TwoDList clone
+		twoDList dim(1,1)
+		assertNil(twoDList get(1,0))
+		assertNil(twoDList get(0,1))
+	)
+)
 
 DayTwoProblemOne run
 DayTwoProblemTwo run
 DayTwoProblemThree run
 DayTwoProblemFour run
+DayTwoProblemFive run

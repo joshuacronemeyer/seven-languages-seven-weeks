@@ -41,3 +41,24 @@ List myAverage := method(
 	)
 	sum / (self size)
 )
+
+//Problem 5
+TwoDList := Object clone
+TwoDList dim := method(x, y,
+  self listOfLists := list()
+  y repeat(
+	  newList := list()
+		x repeat(newList append(nil))
+		self listOfLists append(newList)
+	)
+)
+
+TwoDList get := method(x, y,
+  (y >= self listOfLists size) ifTrue(return nil)
+  self listOfLists at(y) at(x)
+)
+	
+TwoDList set := method(x, y, value,
+	(y >= self listOfLists size) ifTrue(Exception raise("There are only " .. listOfLists size .. " lists.  Your attempt to set list at index " .. y .. " failed."))
+	self listOfLists at(y) atPut(x, value)
+)
