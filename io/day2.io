@@ -43,22 +43,54 @@ List myAverage := method(
 )
 
 //Problem 5
-TwoDList := Object clone
-TwoDList dim := method(x, y,
-  self listOfLists := list()
-  y repeat(
-	  newList := list()
-		x repeat(newList append(nil))
-		self listOfLists append(newList)
-	)
-)
+TwoDList := Object clone do(
+  init := method(
+    self listOfLists := list()
+  )
+  
+  dim := method(x, y,
+    y repeat(
+  	  newList := list()
+  		x repeat(newList append(nil))
+  		self listOfLists append(newList)
+  	)
+  )
 
-TwoDList get := method(x, y,
-  (y >= self listOfLists size) ifTrue(return nil)
-  self listOfLists at(y) at(x)
-)
+  get := method(x, y,
+    (y >= self listOfLists size) ifTrue(return nil)
+    self listOfLists at(y) at(x)
+  )
 	
-TwoDList set := method(x, y, value,
-	(y >= self listOfLists size) ifTrue(Exception raise("There are only " .. listOfLists size .. " lists.  Your attempt to set list at index " .. y .. " failed."))
-	self listOfLists at(y) atPut(x, value)
+  set := method(x, y, value,
+  	(y >= self listOfLists size) ifTrue(Exception raise("There are only " .. listOfLists size .. " lists.  Your attempt to set list at index " .. y .. " failed."))
+  	self listOfLists at(y) atPut(x, value)
+  )
+  
+  transpose := method(
+    transposedLists := self _emptyTransposedList()
+    listOfLists foreach(list,
+      index := 0
+      list foreach(element,
+        transposedLists at(index) append(element)
+        index := index + 1
+      )
+    )
+    self _newTwoDList(transposedLists)
+  )
+  
+  _emptyTransposedList := method(
+    transposedLists := list()
+    listOfLists at(0) size repeat(transposedLists append(list()))
+    transposedLists
+  )
+  
+  _newTwoDList := method(listOfLists,
+    transpose := TwoDList clone
+    transpose listOfLists := listOfLists
+    transpose
+  )
+  
+  _ifOutOfBounds := method(index, consequence,
+    (index >= self listOfLists size) ifTrue(consequence call)
+  )
 )

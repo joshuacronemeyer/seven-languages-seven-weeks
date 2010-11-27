@@ -79,8 +79,21 @@ DayTwoProblemFive := UnitTest clone do(
 	)
 )
 
+DayTwoProblemSix := UnitTest clone do(
+  testTranspose := method(
+    twoDList := TwoDList clone
+		twoDList listOfLists := list(list(1,2), list(3,4))
+		transpose := twoDList transpose
+		assertEquals(twoDList get(0,0), transpose get(0,0))
+		assertEquals(twoDList get(1,0), transpose get(0,1))
+		assertEquals(twoDList get(0,1), transpose get(1,0))
+		assertEquals(twoDList get(1,1), transpose get(1,1))
+  )
+)
+
 DayTwoProblemOne run
 DayTwoProblemTwo run
 DayTwoProblemThree run
 DayTwoProblemFour run
 DayTwoProblemFive run
+DayTwoProblemSix run
