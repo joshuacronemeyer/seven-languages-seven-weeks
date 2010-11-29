@@ -7,4 +7,10 @@ DayThreeProblemOne := UnitTest clone do(
   )
 )
 
+DayThreeProblemTwo := UnitTest clone do(
+  testSquareBracketsWork := method(
+    assertEquals(list(1,2,3), [1,2,3])
+  )
+)
 DayThreeProblemOne run
+DayThreeProblemTwo run

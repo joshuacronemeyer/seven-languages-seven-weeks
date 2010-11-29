@@ -38,3 +38,9 @@ Builder reset := method(
 Builder getXml := method(
   xml join
 )
+
+//problem 2
+squareBrackets := method(
+  //call message evaluatedArgs //why doesn't this work?
+  call message argsEvaluatedIn(self) 
+)
